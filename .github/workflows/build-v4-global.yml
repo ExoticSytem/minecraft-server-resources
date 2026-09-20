@@ -1,0 +1,55 @@
+name: Build VSB Spanish V4 Global
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/build_global_es.py'
+      - '.github/workflows/build-v4-global.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install translator
+        run: |
+          python -m pip install --upgrade pip
+          pip install argostranslate
+
+      - name: Build global Spanish resource pack
+        run: python tools/build_global_es.py
+
+      - name: Validate resource pack
+        shell: bash
+        run: |
+          unzip -t VSB_Espanol_1.8.1.zip
+          echo "SHA-1:"
+          cat VSB_Espanol_1.8.1.sha1
+
+      - name: Commit V4 pack
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add VSB_Espanol_1.8.1.zip VSB_Espanol_1.8.1.sha1
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Build VSB Spanish V4 global resource pack"
+            git push
+          fi
