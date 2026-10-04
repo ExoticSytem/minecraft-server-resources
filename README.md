@@ -34,3 +34,31 @@ El archivo mantiene siempre la misma URL. Cuando cambia el contenido del ZIP, so
 La compilación global se genera mediante GitHub Actions y valida la integridad del ZIP antes de publicarlo.
 
 > Algunos textos escritos directamente dentro del código de un mod (hardcoded) no pueden sustituirse mediante un resource pack normal.
+
+## Craft to Exile 2 — Español Chile
+
+Resource pack complementario de traducción al español para **Craft to Exile 2 2.1.4** en **Minecraft 1.20.1**.
+
+### Descarga directa
+
+```text
+https://raw.githubusercontent.com/ExoticSytem/minecraft-server-resources/main/CTE2_2.1.4_ES_CL_ResourcePack.zip
+```
+
+### SHA-1 actual
+
+```text
+c7b0ef18af739c9d2dc87452a96d5024c61065e7
+```
+
+### server.properties
+
+```properties
+resource-pack=https://raw.githubusercontent.com/ExoticSytem/minecraft-server-resources/main/CTE2_2.1.4_ES_CL_ResourcePack.zip
+resource-pack-sha1=c7b0ef18af739c9d2dc87452a96d5024c61065e7
+require-resource-pack=true
+resource-pack-prompt={"text":"Este servidor utiliza la traducción al español de Craft to Exile 2.","color":"gold"}
+```
+
+El archivo mantiene una URL fija. Si el ZIP se actualiza, se debe recalcular y actualizar el SHA-1 en `server.properties`.
+
